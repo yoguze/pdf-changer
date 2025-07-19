@@ -2,14 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>PDF結合アプリ</title>
+  <title>2つのPDFを結合</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>PDF結合アプリ</h1>
+  <h1>2つのPDFを結合する</h1>
   <form action="/merge" method="post" enctype="multipart/form-data">
-  <input type="file" name="pdfs" accept="application/pdf" multiple required>
-  <button type="submit">結合してダウンロード</button>
-</form>
+    <div>
+      <label>ファイル1:</label><br>
+      <input type="file" name="file1" accept="application/pdf" required>
+    </div>
+    <br>
+    <div>
+      <label>ファイル2:</label><br>
+      <input type="file" name="file2" accept="application/pdf" required>
+    </div>
+    <br>
+    <button type="submit">結合してダウンロード</button>
+  </form>
 </body>
 </html>

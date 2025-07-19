@@ -10,14 +10,21 @@ def index():
 
 @app.route('/merge', methods=['POST'])
 def merge():
-    files = request.files.getlist('pdfs')
+    file1 = request.files.get('file1')
+    file2 = request.files.get('file2')
+
+    if not file1 or not file2:
+        return '2つのPDFファイルを選択してください。', 400
+
     merger = PdfMerger()
-    for f in files:
-        merger.append(f)
+    merger.append(file1)
+    merger.append(file2)
+
     output = io.BytesIO()
     merger.write(output)
-    output.seek(0)
     merger.close()
+    output.seek(0)
+
     return send_file(output, as_attachment=True, download_name='merged.pdf', mimetype='application/pdf')
 
 if __name__ == '__main__':
